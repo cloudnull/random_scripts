@@ -1,5 +1,5 @@
-Random Scripts That Could Useful
-################################
+Random Scripts That Could be Useful
+###################################
 :tags: rackspace, cloud, Linux, bash, python, shell
 :category: \*nix
 
