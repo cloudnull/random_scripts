@@ -89,4 +89,25 @@ apt-get -y install -f
 
 # Exit cleanly
 $(which rm) -rf "$BUILD_DIR"
+
+# Reload the Kernel Module
+modprobe -r openvswitch
+modprobe openvswitch
+
+# Wait for the module to be loaded
+sleep 2
+
+# Restart OVS
+service openvswitch-switch restart
+
+# Give the new OVS just a moment to rebuild the flows
+sleep 5
+
+# Restart the Neutron Agent
+if [ -f "/etc/init.d/quantum-plugin-openvswitch-agent" ];then
+  service quantum-plugin-openvswitch-agent restart
+elif [ -f "/etc/init.d/neutron-plugin-openvswitch-agent" ];then
+  service neutron-plugin-openvswitch-agent restart
+fi
+
 exit 0
