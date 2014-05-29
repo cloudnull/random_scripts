@@ -91,7 +91,9 @@ apt-get -y install -f
 $(which rm) -rf "$BUILD_DIR"
 
 # Reload the Kernel Module
-modprobe -r openvswitch
+if [ "$(lsmod | grep openvswitch)" ];then
+  modprobe -r openvswitch
+fi
 modprobe openvswitch
 
 # Wait for the module to be loaded
