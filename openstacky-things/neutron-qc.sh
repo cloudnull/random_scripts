@@ -31,11 +31,10 @@ if [ ! -f "$HOME/$OPENRC" ];then
   echo "No $OPENRC File found"
   exit 1
 else
-  source openrc
+  source "$HOME/$OPENRC"
 fi
 
 BASE_IMAGE="$(nova image-list | awk '/ACTIVE/ {print $2}' | head -n 1)"
-
 FLAVOR=${FLAVOR:-2}
 IMAGE=${IMAGE:-${BASE_IMAGE}}
 KEYNAME=${KEYNAME:-"PrivateCloudTest"}
